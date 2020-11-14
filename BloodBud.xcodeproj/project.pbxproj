@@ -17,6 +17,9 @@
 		4F26DD3D25604190004F2F5C /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26DD3C25604190004F2F5C /* ComplicationController.swift */; };
 		4F26DD3F25604193004F2F5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F26DD3E25604193004F2F5C /* Assets.xcassets */; };
 		4F26DD4225604193004F2F5C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F26DD4125604193004F2F5C /* Preview Assets.xcassets */; };
+		4F26DD5725604D78004F2F5C /* SqueezeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26DD5625604D78004F2F5C /* SqueezeView.swift */; };
+		4F26DD5C25604DB5004F2F5C /* RestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26DD5B25604DB5004F2F5C /* RestView.swift */; };
+		4F26DD672560509F004F2F5C /* BloodTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26DD662560509F004F2F5C /* BloodTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		4F26DD4125604193004F2F5C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F26DD4325604193004F2F5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F26DD4425604193004F2F5C /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		4F26DD5625604D78004F2F5C /* SqueezeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqueezeView.swift; sourceTree = "<group>"; };
+		4F26DD5B25604DB5004F2F5C /* RestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestView.swift; sourceTree = "<group>"; };
+		4F26DD662560509F004F2F5C /* BloodTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,12 +128,15 @@
 			children = (
 				4F26DD3425604190004F2F5C /* BloodBudApp.swift */,
 				4F26DD3625604190004F2F5C /* ContentView.swift */,
+				4F26DD5625604D78004F2F5C /* SqueezeView.swift */,
+				4F26DD5B25604DB5004F2F5C /* RestView.swift */,
 				4F26DD3825604190004F2F5C /* NotificationController.swift */,
 				4F26DD3A25604190004F2F5C /* NotificationView.swift */,
 				4F26DD3C25604190004F2F5C /* ComplicationController.swift */,
 				4F26DD3E25604193004F2F5C /* Assets.xcassets */,
 				4F26DD4325604193004F2F5C /* Info.plist */,
 				4F26DD4425604193004F2F5C /* PushNotificationPayload.apns */,
+				4F26DD662560509F004F2F5C /* BloodTimer.swift */,
 				4F26DD4025604193004F2F5C /* Preview Content */,
 			);
 			path = "BloodBud WatchKit Extension";
@@ -269,9 +278,12 @@
 			files = (
 				4F26DD3925604190004F2F5C /* NotificationController.swift in Sources */,
 				4F26DD3725604190004F2F5C /* ContentView.swift in Sources */,
+				4F26DD5C25604DB5004F2F5C /* RestView.swift in Sources */,
 				4F26DD3D25604190004F2F5C /* ComplicationController.swift in Sources */,
+				4F26DD672560509F004F2F5C /* BloodTimer.swift in Sources */,
 				4F26DD3525604190004F2F5C /* BloodBudApp.swift in Sources */,
 				4F26DD3B25604190004F2F5C /* NotificationView.swift in Sources */,
+				4F26DD5725604D78004F2F5C /* SqueezeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
