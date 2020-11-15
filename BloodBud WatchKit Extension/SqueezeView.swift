@@ -8,47 +8,52 @@
 import SwiftUI
 
 struct SqueezeView: View {
-    @Binding var pushed: Bool
-    @State var timeCountdown = 900
-    @State var completed = false
-    @State var secondPushed: Bool = false
+    @Binding var page : Int
+    @State var fiveSecCountdown = TimeInterval(5)
+    @State var bloodCountdown = 900
+    @State var bloodCompleted = false
+    
     let timer1 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let timer2 = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        let min = self.timeCountdown/60
-        let sec = self.timeCountdown%60
+        let min = self.bloodCountdown/60
+        let sec = self.bloodCountdown%60
         let timeString = String(format: "%02d:%02d", min, sec)
         VStack {
             Text("Next Squeeze")
-            Text("02:45")
-                .font(.largeTitle)
-                .padding()
+            Text(String(format: "%.2f", self.fiveSecCountdown))
+                .font(Font.title.monospacedDigit())
+                .onReceive(timer2){ _ in
+                    if fiveSecCountdown > 0.01 {
+                        fiveSecCountdown -= 0.01
+                    }
+                    else if !self.bloodCompleted {
+                        WKInterfaceDevice().play(.notification)
+                        fiveSecCountdown = 5
+                    }
+                }
             Text("Time remaining: \(timeString)")
+                .font(Font.caption.monospacedDigit())
                 .onReceive(timer1){ _ in
-                    if self.timeCountdown > 0 {
-                        self.timeCountdown -= 1
+                    if self.bloodCountdown > 0 && !self.bloodCompleted {
+                        bloodCountdown -= 1
                     }
                     else {
-                        self.completed = true
+                        bloodCompleted = true
                     }
                 }
             Spacer()
-            ZStack {
-                NavigationLink(destination:RestView(pushed: self.$secondPushed, secondPushed: self.$secondPushed), isActive: self.$secondPushed) {}
-                Button("Finished"){
-                    self.secondPushed = true
-                }
+            NavigationLink(destination: RestView(page: $page)) {
+                Text("Finished")
             }
-        }
-        .alert(isPresented: $completed) {
-            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok")))
+            .simultaneousGesture(TapGesture().onEnded{ self.bloodCompleted = true })
         }
     }
 }
 
-//struct SqueezeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SqueezeView(self.$true)
-//    }
-//}
+struct SqueezeView_Previews: PreviewProvider {
+    static var previews: some View {
+        SqueezeView(page: .constant(0))
+    }
+}
