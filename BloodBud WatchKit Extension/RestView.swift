@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RestView: View {
-    //@Environment(\.managedObjectContext) var moc
+    @Environment(\.managedObjectContext) var moc
     
     @Binding var page: Int
     @State var restCountdown = 900
@@ -39,18 +39,18 @@ struct RestView: View {
             }
         }
         .alert(isPresented: $restCompleted) {
-            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: { self.page = 1 }))
+            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: { self.createDonation() }))
         }
     }
     
-//    func createDonation() {
-//        let donation = Donation(context: moc)
-//        donation.date = Date()
-//        if self.moc.hasChanges {
-//            try? self.moc.save()
-//        }
-//        self.page = 1        
-//    }
+    func createDonation() {
+        let donation = Donation(context: moc)
+        donation.date = Date()
+        if self.moc.hasChanges {
+            try? self.moc.save()
+        }
+        self.page = 1
+    }
 }
 
 struct RestView_Previews: PreviewProvider {

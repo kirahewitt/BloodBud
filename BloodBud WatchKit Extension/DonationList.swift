@@ -20,26 +20,21 @@ struct DonationList: View {
             let firstDate = donations[0].date
             let lastDonation = Calendar.current.dateComponents([.day], from: firstDate!, to: Date())
             let nextDonation = 56 - lastDonation.day!
-            VStack {
-                Text("Last Donation")
-                HStack {
-                    Text("\(lastDonation.day!) days ago")
-                }
-                Text("Next Donation")
+            VStack (alignment: .leading) {
+                Text("Next Donation").font(.headline)
                 HStack {
                     if (nextDonation <= 0){
                         Text("You're eligible for one today")
                     }
                     else {
-                        Text("\(nextDonation) days from today")
+                        Text("Eligible in \(nextDonation) day(s)")
                     }
                 }
-
-                Text("Past Donations")
+                Text("Past Donations").font(.headline)
                 List {
                     ForEach(donations) { item in
                         DonationRow(item: item)
-                    }
+                    }.onDelete(perform: deleteItems)
                 }
             }
         }
@@ -50,6 +45,13 @@ struct DonationList: View {
                     .padding(.bottom)
                 Text("Save a life, sign up to donate blood today")
             }
+        }
+    }
+    
+    func deleteItems (at offsets: IndexSet) {
+        for index in offsets {
+            let item = donations[index]
+            moc.delete(item)
         }
     }
 }
