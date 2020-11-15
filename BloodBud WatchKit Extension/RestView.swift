@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct RestView: View {
-    @EnvironmentObject var donation: DonationInfo
+    //@EnvironmentObject var donation: DonationInfo
     @Binding var page: Int
-    @State var completed: Bool = false
+    //@State var completed: Bool = false
+    @State var restCountdown = 900
+    @State var restCompleted = false
     
 //    init() {
 //        self.completed = donation.restCompleted
@@ -19,24 +21,28 @@ struct RestView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        let min = self.donation.restCountdown/60
-        let sec = self.donation.restCountdown%60
+        let min = self.restCountdown/60
+        let sec = self.restCountdown%60
         let timeString = String(format: "%02d:%02d", min, sec)
         VStack {
             Spacer()
             Text("Rest Period")
             Text("\(timeString)")
                 .onReceive(timer){ _ in
-                    self.donation.resting()
+                    if restCountdown > 0 && !restCompleted {
+                        self.restCountdown -= 1
+                    }
+                    else {
+                        self.restCompleted = true
+                    }
                 }
                 .font(Font.largeTitle.monospacedDigit())
             Spacer()
             Button("Skip"){
-                donation.restCompleted = true
-                self.completed = true
+                self.restCompleted = true
             }
         }
-        .alert(isPresented: $completed) {
+        .alert(isPresented: $restCompleted) {
             Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: { self.page = 1 }))
         }
     }
