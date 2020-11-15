@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SqueezeView: View {
+    @Binding var pushed: Bool
     @State var timeCountdown = 900
     @State var completed = false
+    @State var secondPushed: Bool = false
     let timer1 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let timer2 = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
@@ -32,8 +34,11 @@ struct SqueezeView: View {
                     }
                 }
             Spacer()
-            NavigationLink(destination: RestView()) {
-                Text("Finished")
+            ZStack {
+                NavigationLink(destination:RestView(pushed: self.$secondPushed, secondPushed: self.$secondPushed), isActive: self.$secondPushed) {}
+                Button("Finished"){
+                    self.secondPushed = true
+                }
             }
         }
         .alert(isPresented: $completed) {
@@ -42,8 +47,8 @@ struct SqueezeView: View {
     }
 }
 
-struct SqueezeView_Previews: PreviewProvider {
-    static var previews: some View {
-        SqueezeView()
-    }
-}
+//struct SqueezeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SqueezeView(self.$true)
+//    }
+//}

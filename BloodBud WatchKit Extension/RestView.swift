@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RestView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    
+    @Binding var pushed: Bool
+    @Binding var secondPushed: Bool
     @State var timeCountdown = 900
     @State var completed = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -39,13 +40,15 @@ struct RestView: View {
 
         }
         .alert(isPresented: $completed) {
-            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: {viewRouter.currentPage = 1}))
+            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: {self.pushed = false
+                self.secondPushed = false
+            }))
         }
     }
 }
 
-struct RestView_Previews: PreviewProvider {
-    static var previews: some View {
-        RestView()
-    }
-}
+//struct RestView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RestView()
+//    }
+//}
