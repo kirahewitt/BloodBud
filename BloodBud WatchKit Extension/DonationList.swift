@@ -61,12 +61,3 @@ struct DonationList_Previews: PreviewProvider {
         DonationList()
     }
 }
-
-//struct DonationList: View {
-//    var body: some View {
-//        VStack {
-//            Text("Next Donation")
-//            Text("Past Donations")
-//        }
-//    }
-//}

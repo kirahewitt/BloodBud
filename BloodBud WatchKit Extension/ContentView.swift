@@ -32,3 +32,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(page: .constant(0)).environmentObject(DonationInfo())
     }
 }
+
