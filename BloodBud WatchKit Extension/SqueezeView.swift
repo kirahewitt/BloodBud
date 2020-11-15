@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SqueezeView: View {
-    //@EnvironmentObject var donation: DonationInfo
     @Binding var page : Int
     @State var fiveSecCountdown = TimeInterval(5)
     @State var bloodCountdown = 900
@@ -56,6 +55,5 @@ struct SqueezeView: View {
 struct SqueezeView_Previews: PreviewProvider {
     static var previews: some View {
         SqueezeView(page: .constant(0))
-            //.environmentObject(DonationInfo())
     }
 }

@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct RestView: View {
-    //@EnvironmentObject var donation: DonationInfo
+    //@Environment(\.managedObjectContext) var moc
+    
     @Binding var page: Int
-    //@State var completed: Bool = false
     @State var restCountdown = 900
     @State var restCompleted = false
-    
-//    init() {
-//        self.completed = donation.restCompleted
-//    }
-    
+
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -46,6 +42,15 @@ struct RestView: View {
             Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: { self.page = 1 }))
         }
     }
+    
+//    func createDonation() {
+//        let donation = Donation(context: moc)
+//        donation.date = Date()
+//        if self.moc.hasChanges {
+//            try? self.moc.save()
+//        }
+//        self.page = 1        
+//    }
 }
 
 struct RestView_Previews: PreviewProvider {
