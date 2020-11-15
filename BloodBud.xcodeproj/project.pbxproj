@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F006CF2256087E20027F829 /* DonationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F006CF1256087E20027F829 /* DonationList.swift */; };
 		4F006D0225608FAF0027F829 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F006D0125608FAF0027F829 /* ViewRouter.swift */; };
+		4F006D2D2560C63B0027F829 /* DonationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F006D2C2560C63B0027F829 /* DonationInfo.swift */; };
 		4F26DD242560418A004F2F5C /* BloodBud WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4F26DD232560418A004F2F5C /* BloodBud WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4F26DD292560418F004F2F5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F26DD282560418F004F2F5C /* Assets.xcassets */; };
 		4F26DD3025604190004F2F5C /* BloodBud WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4F26DD2F25604190004F2F5C /* BloodBud WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		4F006CF1256087E20027F829 /* DonationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationList.swift; sourceTree = "<group>"; };
 		4F006D0125608FAF0027F829 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		4F006D2C2560C63B0027F829 /* DonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationInfo.swift; sourceTree = "<group>"; };
 		4F26DD1F2560418A004F2F5C /* BloodBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloodBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26DD232560418A004F2F5C /* BloodBud WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BloodBud WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26DD282560418F004F2F5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				4F26DD3425604190004F2F5C /* BloodBudApp.swift */,
+				4F006D2C2560C63B0027F829 /* DonationInfo.swift */,
 				4F26DD6E25606B5A004F2F5C /* PagerManager.swift */,
 				4F26DD7325606D07004F2F5C /* ParentView.swift */,
 				4F26DD3625604190004F2F5C /* ContentView.swift */,
@@ -290,6 +293,7 @@
 				4F26DD5C25604DB5004F2F5C /* RestView.swift in Sources */,
 				4F006D0225608FAF0027F829 /* ViewRouter.swift in Sources */,
 				4F006CF2256087E20027F829 /* DonationList.swift in Sources */,
+				4F006D2D2560C63B0027F829 /* DonationInfo.swift in Sources */,
 				4F26DD3D25604190004F2F5C /* ComplicationController.swift in Sources */,
 				4F26DD7425606D07004F2F5C /* ParentView.swift in Sources */,
 				4F26DD3525604190004F2F5C /* BloodBudApp.swift in Sources */,

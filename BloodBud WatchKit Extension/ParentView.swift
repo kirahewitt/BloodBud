@@ -12,11 +12,11 @@ struct ParentView: View {
     @State private var currentPage = 0
     
     var body: some View {
-
+        
         //Pager Manager
         VStack{
             PagerManager(pageCount: 2, currentIndex: $currentPage) {
-                ContentView()
+                ContentView(page: $currentPage)
                 DonationList()
             }
 

@@ -9,14 +9,21 @@ import SwiftUI
 
 @main
 struct BloodBudApp: App {
+    var donationInfo = DonationInfo()
     @SceneBuilder var body: some Scene {
         WindowGroup {
             NavigationView {
-                ParentView()
+                ParentView().environmentObject(donationInfo)
             }
         }
 
         WKNotificationScene(controller: NotificationController.self, category: "myCategory")
+    }
+}
+
+struct BloodBudApp_Previews: PreviewProvider {
+    static var previews: some View {
+        ParentView().environmentObject(DonationInfo())
     }
 }
 
@@ -36,8 +43,3 @@ struct BloodBudApp: App {
 //    }
 //}
 //
-//struct BloodBudApp_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ParentView().environmentObject(ViewRouter())
-//    }
-//}

@@ -8,42 +8,40 @@
 import SwiftUI
 
 struct SqueezeView: View {
-    @State var timeCountdown = 900
-    @State var completed = false
+    @EnvironmentObject var donation: DonationInfo
+    @Binding var page : Int
+    
     let timer1 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let timer2 = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        let min = self.timeCountdown/60
-        let sec = self.timeCountdown%60
+        let min = self.donation.bloodCountdown/60
+        let sec = self.donation.bloodCountdown%60
         let timeString = String(format: "%02d:%02d", min, sec)
         VStack {
             Text("Next Squeeze")
-            Text("02:45")
-                .font(.largeTitle)
-                .padding()
+            Text(String(format: "%.2f", self.donation.fiveSecCountdown))
+                .font(Font.title.monospacedDigit())
+                .onReceive(timer2){ _ in
+                    self.donation.fiveSecondsPassed()
+                }
             Text("Time remaining: \(timeString)")
+                .font(Font.caption.monospacedDigit())
                 .onReceive(timer1){ _ in
-                    if self.timeCountdown > 0 {
-                        self.timeCountdown -= 1
-                    }
-                    else {
-                        self.completed = true
-                    }
+                    self.donation.bloodFinishedDrawing()
                 }
             Spacer()
-            NavigationLink(destination: RestView()) {
+            NavigationLink(destination: RestView(page: $page)) {
                 Text("Finished")
             }
-        }
-        .alert(isPresented: $completed) {
-            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok")))
+            .simultaneousGesture(TapGesture().onEnded{ self.donation.bloodCompleted = true })
         }
     }
 }
 
 struct SqueezeView_Previews: PreviewProvider {
     static var previews: some View {
-        SqueezeView()
+        SqueezeView(page: .constant(0))
+            .environmentObject(DonationInfo())
     }
 }

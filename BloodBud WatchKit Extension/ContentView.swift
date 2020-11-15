@@ -8,28 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var page : Int
     @State var pushed: Bool = false
+    
     var body: some View {
         NavigationView {
-            Spacer()
             VStack {
+                Spacer()
                 Text("New Donation")
                     .padding()
-                NavigationLink(destination: SqueezeView(pushed: self.$pushed), isActive: self.$pushed) {
+                NavigationLink(destination: SqueezeView(page: $page)) {
                     Text("Start")
-                Button("push"){
-                    self.pushed = true
-                    
                 }
+                Spacer()
             }
-            Spacer()
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(page: .constant(0)).environmentObject(DonationInfo())
     }
 }
 
