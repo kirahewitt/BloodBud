@@ -8,47 +8,60 @@
 import SwiftUI
 
 struct RestView: View {
-    @EnvironmentObject var viewRouter: ViewRouter
-    @Binding var pushed: Bool
-    @Binding var secondPushed: Bool
-    @State var timeCountdown = 900
-    @State var completed = false
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var publisher = PassthroughSubject<Void, Never>()
+    
+    @Binding var page: Int
+    @State var restCountdown = 900
+    @State var restCompleted = false
+
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        let min = self.timeCountdown/60
-        let sec = self.timeCountdown%60
+        let min = self.restCountdown/60
+        let sec = self.restCountdown%60
         let timeString = String(format: "%02d:%02d", min, sec)
         VStack {
             Spacer()
             Text("Rest Period")
             Text("\(timeString)")
                 .onReceive(timer){ _ in
-                    if self.timeCountdown > 0 {
-                        self.timeCountdown -= 1
+                    if restCountdown > 0 && !restCompleted {
+                        self.restCountdown -= 1
                     }
                     else {
-                        self.completed = true
+                        self.restCompleted = true
                     }
                 }
-                .font(.largeTitle)
+                .font(Font.largeTitle.monospacedDigit())
             Spacer()
             Button("Skip"){
-                self.completed = true
+                self.restCompleted = true
             }
-
-
         }
-        .alert(isPresented: $completed) {
-            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: {self.pushed = false
-                self.secondPushed = false
-            }))
+        .alert(isPresented: $restCompleted) {
+            Alert(title: Text("Thank you! "), message: Text("Your donation is saving lives."), dismissButton: Alert.Button.default(Text("Ok"), action: { self.createDonation() }))
         }
+    }
+    
+    func createDonation() {
+        let donation = Donation(context: moc)
+        donation.date = Date()
+        if self.moc.hasChanges {
+            try? self.moc.save()
+        }
+
+        DispatchQueue.main.async {
+            self.presentationMode.wrappedValue.dismiss()
+            self.publisher.send()
+        }        
+        //self.page = 1
     }
 }
 
-//struct RestView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RestView()
-//    }
-//}
+struct RestView_Previews: PreviewProvider {
+    static var previews: some View {
+        RestView(page: .constant(0)).environmentObject(DonationInfo())
+    }
+}

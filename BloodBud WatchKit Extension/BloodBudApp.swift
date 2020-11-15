@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct BloodBudApp: App {
+    var donationInfo = DonationInfo()
+    let context = PersistentCloudKitContainer.persistentContainer.viewContext
     @SceneBuilder var body: some Scene {
         WindowGroup {
             NavigationView {
                 ParentView()
+                    .environmentObject(donationInfo)
+                    .environment(\.managedObjectContext, context)
             }
         }
 
@@ -20,24 +24,12 @@ struct BloodBudApp: App {
     }
 }
 
-//import SwiftUI
-//
-//@main
-//struct BloodBudApp: App {
-//    
-//    @SceneBuilder var body: some Scene {
-//        WindowGroup {
-//            NavigationView {
-//                ParentView().environmentObject(ViewRouter())
-//            }
-//        }
-//
-//        WKNotificationScene(controller: NotificationController.self, category: "myCategory")
-//    }
-//}
-//
-//struct BloodBudApp_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ParentView().environmentObject(ViewRouter())
-//    }
-//}
+struct BloodBudApp_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = PersistentCloudKitContainer.persistentContainer.viewContext
+        ParentView()
+            .environmentObject(DonationInfo())
+            .environment(\.managedObjectContext, context)
+
+    }
+}
